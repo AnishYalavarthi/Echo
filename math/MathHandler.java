@@ -33,7 +33,9 @@ public class MathHandler extends RequestHandler {
             }
             case "sub" -> result = Double.parseDouble(tokens[1]) - Double.parseDouble(tokens[2]);
             case "div" -> result = Double.parseDouble(tokens[1]) / Double.parseDouble(tokens[2]);
-            default -> throw new Exception("Not a valid request");
+            default -> {
+                return "Not a valid request";
+            }
         }
         return Double.toString(result);
     }
