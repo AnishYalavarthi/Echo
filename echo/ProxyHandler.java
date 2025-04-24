@@ -11,5 +11,9 @@ public class ProxyHandler extends RequestHandler {
         peer.requestConnection(host, port);
     }
 
-    // etc.
+    @Override
+    protected String response(String request) throws Exception {
+        peer.send(request);
+        return peer.receive();
+    }
 }
