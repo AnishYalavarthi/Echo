@@ -3,7 +3,7 @@ package casino;
 import java.net.*;
 import java.util.Random;
 
-import echo.*;
+import echo.RequestHandler;
 
 public class CasinoHandler extends RequestHandler {
 
@@ -51,7 +51,7 @@ public class CasinoHandler extends RequestHandler {
                 result = "total = " + playerTotal + ", again?";
             }
         } else if (request.equalsIgnoreCase("stay")) {
-            result = "player total = " + playerTotal + ", casino total = " + casinoTotal;
+            result = "player total = " + playerTotal + ", src.src.echo.echo.casino total = " + casinoTotal;
             if (playerTotal < casinoTotal) {
                 result = result + ", you lose!";
             } else if (playerTotal > casinoTotal) {

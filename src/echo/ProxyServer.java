@@ -3,7 +3,7 @@ package echo;
 import java.io.IOException;
 import java.net.Socket;
 
-public class ProxyServer extends Server{
+public class ProxyServer extends Server {
     String peerHost;
     int peerPort;
 

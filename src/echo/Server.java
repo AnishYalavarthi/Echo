@@ -1,10 +1,7 @@
 package echo;
 
-import java.util.*;
 import java.io.*;
 import java.net.*;
-import casino.*;
-import math.*;
 
 public class Server {
 
