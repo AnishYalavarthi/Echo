@@ -42,7 +42,7 @@ public class SimpleClient extends Correspondent {
         stdout.println("bye");
     }
 
-    // java src.src.echo.echo.SimpleClient port = 5555 host = localHost
+    // java src.echo.echo.SimpleClient port = 5555 host = localHost
     public static void main(String[] args) {
         int port = 5555;
         String host = "localhost";
