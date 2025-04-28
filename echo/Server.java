@@ -1,7 +1,6 @@
 package echo;
 
 import java.io.*;
-import java.lang.reflect.Constructor;
 import java.net.*;
 
 public class Server {
@@ -16,6 +15,7 @@ public class Server {
             myPort = port;
             mySocket = new ServerSocket(myPort);
             this.handlerType = Class.forName(handlerTypeName);
+            System.out.println("I'm listening ..");
         } catch(Exception e) {
             System.err.println(e.getMessage());
             System.exit(1);
@@ -23,7 +23,7 @@ public class Server {
     }
 
 
-    public void listen() throws IOException, InstantiationException, IllegalAccessException{
+    public void listen() throws IOException, IllegalAccessException, InstantiationException {
         while(true) {
             // accept a connection
             Socket socket = mySocket.accept();
@@ -35,10 +35,10 @@ public class Server {
         } // while
     }
 
-    public RequestHandler makeHandler(Socket s) throws InstantiationException, IllegalAccessException{
+    public RequestHandler makeHandler(Socket s) throws IllegalAccessException, InstantiationException {
         try {
-            Constructor<?> constructor = handlerType.getConstructor(Socket.class);
-            RequestHandler handler = (RequestHandler) constructor.newInstance();
+            //Constructor<?> constructor = handlerType.getConstructor(Socket.class);
+            RequestHandler handler = (RequestHandler) handlerType.newInstance();
             // set handler's socket to s
             handler.setSocket(s);
             // return handler

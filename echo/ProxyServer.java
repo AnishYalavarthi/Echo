@@ -15,7 +15,7 @@ public class ProxyServer extends Server {
     }
 
     @Override
-    public RequestHandler makeHandler(Socket s) throws InstantiationException, IllegalAccessException {
+    public RequestHandler makeHandler(Socket s) throws IllegalAccessException, InstantiationException {
         ProxyHandler handler = (ProxyHandler) handlerType.newInstance();
         // set handler's socket to s
         handler.setSocket(s);
@@ -24,7 +24,7 @@ public class ProxyServer extends Server {
         return handler;
     }
 
-    public static void main(String[] args) throws IOException, InstantiationException, IllegalAccessException {
+    public static void main(String[] args) throws IOException, IllegalAccessException, InstantiationException {
         int port = 5555;
         int peerPort = 6666;
         String peerHost = "localhost";

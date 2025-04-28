@@ -1,8 +1,7 @@
-package security;
-
-import echo.*;
+package echo;
 
 import java.net.Socket;
+import java.util.Objects;
 
 public class SecurityHandler extends ProxyHandler {
     protected static SafeTable userTable = new SafeTable();
@@ -22,11 +21,11 @@ public class SecurityHandler extends ProxyHandler {
             case "new":
                 if (userTable.get(info[1]) == null) userTable.put(info[1], info[2]);
                 shutDown();
-                return "User registered";
+                return "User registered.. terminating session";
             case "login":
-                if (userTable.get(info[1]) != info[2] || userTable.get(info[1]) == null){
+                if (!Objects.equals(userTable.get(info[1]), info[2]) || userTable.get(info[1]) == null){
                     shutDown();
-                    return "Login invalid";
+                    return "Login invalid.. terminating session";
                 }
                 //add
         }
