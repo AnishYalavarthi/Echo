@@ -2,18 +2,17 @@ package math;
 
 import echo.RequestHandler;
 
+import java.io.IOException;
 import java.net.Socket;
 
 public class MathHandler extends RequestHandler {
 
     public MathHandler(Socket sock) {
         super(sock);
-        System.out.println("MathHandler");
     }
 
     public MathHandler() {
         super();
-        System.out.println("MathHandler");
     }
 
     @Override
