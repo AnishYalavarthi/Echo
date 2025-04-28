@@ -1,5 +1,6 @@
 package echo;
 
+import java.io.IOException;
 import java.net.Socket;
 
 public class ProxyHandler extends RequestHandler {
