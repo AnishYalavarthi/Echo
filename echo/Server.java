@@ -19,29 +19,23 @@ public class Server {
         } catch(Exception e) {
             System.err.println(e.getMessage());
             System.exit(1);
-        } // catch
+        }
     }
 
 
     public void listen() throws IOException, IllegalAccessException, InstantiationException {
         while(true) {
-            // accept a connection
             Socket socket = mySocket.accept();
-            // make handler
             RequestHandler handler = makeHandler(socket);
-            // start handler in its own thread
             Thread thread = new Thread(handler);
             thread.start();
-        } // while
+        }
     }
 
     public RequestHandler makeHandler(Socket s) throws IllegalAccessException, InstantiationException {
         try {
-            //Constructor<?> constructor = handlerType.getConstructor(Socket.class);
             RequestHandler handler = (RequestHandler) handlerType.newInstance();
-            // set handler's socket to s
             handler.setSocket(s);
-            // return handler
             return handler;
         } catch (Exception e){
             throw new RuntimeException(e.getMessage());

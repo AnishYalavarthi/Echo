@@ -1,7 +1,6 @@
 package echo;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.net.Socket;
 
 public class ProxyServer extends Server {
@@ -17,10 +16,8 @@ public class ProxyServer extends Server {
     @Override
     public RequestHandler makeHandler(Socket s) throws IllegalAccessException, InstantiationException {
         ProxyHandler handler = (ProxyHandler) handlerType.newInstance();
-        // set handler's socket to s
         handler.setSocket(s);
         handler.initPeer(peerHost, peerPort);
-        // return handler
         return handler;
     }
 

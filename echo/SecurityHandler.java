@@ -5,6 +5,7 @@ import java.util.Objects;
 
 public class SecurityHandler extends ProxyHandler {
     protected static SafeTable userTable = new SafeTable();
+    protected boolean logged = false;
 
     public SecurityHandler(Socket sock) {
         super(sock);
@@ -15,20 +16,30 @@ public class SecurityHandler extends ProxyHandler {
     }
 
     @Override
-    protected String response(String request) throws Exception {
+    protected String response(String request) {
         String[] info = request.split(" ");
-        switch (info[0]) {
-            case "new":
-                if (userTable.get(info[1]) == null) userTable.put(info[1], info[2]);
-                shutDown();
-                return "User registered.. terminating session";
-            case "login":
-                if (!Objects.equals(userTable.get(info[1]), info[2]) || userTable.get(info[1]) == null){
+        if (!logged) {
+            switch (info[0]) {
+                case "new" -> {
+                    userTable.computeIfAbsent(info[1], k -> info[2]);
                     shutDown();
-                    return "Login invalid.. terminating session";
+                    return "User registered.. terminating session";
                 }
-                //add
+                case "login" -> {
+                    if (!Objects.equals(userTable.get(info[1]), info[2]) || userTable.get(info[1]) == null) {
+                        shutDown();
+                        return "Login invalid.. terminating session";
+                    }
+                    logged = true;
+                    return "Logged in successfully";
+                }
+                default -> {
+                    return "Please provide login information";
+                }
+            }
+        } else {
+            peer.send(request);
+            return peer.receive();
         }
-        return null;
     }
 }
