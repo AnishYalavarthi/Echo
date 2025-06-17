@@ -1,0 +1,1 @@
+Java project that pairs MVC principles with a Client-Server interaction. Requests passed through the terminal from the client to the server are each provided to a separate handler, which is assigned a socket. A proxy server can even be used to intercept the request and utilize a unique handler (e.g. a SecurityHandler, which asks for credentials).
